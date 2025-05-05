@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Player extends Character {
 
     public Player() {
-        super(100, 20, 10, "Dingolingo", 50);
+        super(5150, 80, 10, "Dingolingo", 50);
     }
 
     @Override
