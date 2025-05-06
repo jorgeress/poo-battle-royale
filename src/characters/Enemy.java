@@ -25,17 +25,22 @@ public class Enemy extends Character {
 		
 		Random rand = new Random();
 
-        // Generamos un número aleatorio entre 0 y 1
-        double chance = rand.nextDouble(); // Valor entre 0.0 y 1.0
-        
-        if (chance <= 0.2) {
-            action = new ParalyzingAttackDecorator(action);
-        }
+
+		double paralyzeChance = rand.nextDouble();
+		double burnChance = rand.nextDouble();
+
+		if (paralyzeChance <= 0.25) {
+			action = new ParalyzingAttackDecorator(action);
+		}
+		if (burnChance <= 0.25) {
+			action = new BurningAttackDecorator(action);
+		}
     
 		
 	    if (strength > 60 && action instanceof BasicAttackComponent) {
 	        action = new PowerfulAttackDecorator(action);
 	    }
+	    System.out.println(getName() + " realiza " + action.getDescription());
 
 	    action.perform(this, target);
 	}

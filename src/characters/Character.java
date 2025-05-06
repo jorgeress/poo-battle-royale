@@ -11,6 +11,7 @@ public abstract class Character {
 	public String name;
 	public CharacterState currentState;
 	public boolean reflecting = false;
+	
 
 	public void setReflecting(boolean value) {
 	    this.reflecting = value;

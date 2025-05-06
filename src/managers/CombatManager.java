@@ -21,10 +21,12 @@ public class CombatManager {
 
             System.out.println("\n--- Turno del Jugador ---");
 
+            player.setReflecting(false);
             player.performTurn(enemy);
 
             if (enemy.isAlive()) {
                 System.out.println("\n--- Turno de " + enemy.getName() + " ---");
+                enemy.setReflecting(false);
                 enemy.performTurn(player);
             }
 

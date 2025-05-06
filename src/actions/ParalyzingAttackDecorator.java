@@ -12,7 +12,6 @@ public class ParalyzingAttackDecorator implements ActionComponent{
     }
 
     public void perform(Character attacker, Character target) {
-        System.out.println(attacker.getName() + " realiza " + getDescription());
         int stamina = attacker.getStrength();
         attacker.stamina = stamina - 10;
 

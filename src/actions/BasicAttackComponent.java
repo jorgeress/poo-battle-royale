@@ -13,7 +13,7 @@ public class BasicAttackComponent implements ActionComponent{
 	}
 
 	public String getDescription() {
-		return "Ataque ";
+		return getName();
 	}
 	 
 	 
