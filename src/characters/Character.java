@@ -31,6 +31,9 @@ public abstract class Character {
 	
 	public void takeDamage(int daño) {
 		this.health -= daño;
+		if(this.health <= 0) {
+			this.health = 0;
+		}
 	    System.out.println(name + " recibe " + daño + " de daño. Vida actual: " + health);
 		if(this.health <= 0) {
 			this.currentState = new CharacterDeadState();
