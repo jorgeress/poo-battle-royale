@@ -26,7 +26,7 @@ public class ParalyzingAttackDecorator implements ActionComponent{
 
 	
 	public String getName() {
-		return " paralizador";
+		return "paralizador";
 	}
 
 

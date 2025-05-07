@@ -57,6 +57,9 @@ public abstract class Character {
 	public CharacterState getState() {
 		return currentState;
 	}
+	public Integer getStamina() {
+		return stamina;
+	}
 	
 	public void setHealth(Integer health) {
 		this.health = health;
@@ -69,6 +72,9 @@ public abstract class Character {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public void setStamina(Integer stamina) {
+		this.stamina = stamina;
 	}
 	public void setState(CharacterState state) {
 		this.currentState = state;

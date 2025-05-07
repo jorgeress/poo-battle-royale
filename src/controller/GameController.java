@@ -32,7 +32,7 @@ public class GameController {
             }
         }
 
-        System.out.println("\n¡Has completado todos los combates del mundo!");
+        System.out.println("\n¡Has completado todos los combates!");
     }
 }
 

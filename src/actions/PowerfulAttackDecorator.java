@@ -19,7 +19,7 @@ public class PowerfulAttackDecorator implements ActionComponent {
 
 
 		public String getName() {
-			return " Pesado";
+			return "potente";
 		}
 
 

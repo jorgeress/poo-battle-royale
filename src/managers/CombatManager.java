@@ -1,6 +1,9 @@
 package managers;
 
 import characters.*;
+import utils.PowerUp;
+import utils.PowerUpGenerator;
+import utils.TurnDecider;
 
 public class CombatManager {
 
@@ -16,25 +19,53 @@ public class CombatManager {
     }
 
     public void runCombat() {
+        TurnDecider.FirstTurn firstTurn = TurnDecider.decideFirstTurn();
+        announceFirstTurn(firstTurn);
+
         while (player.isAlive() && enemy.isAlive()) {
             updateStates();
-
-            System.out.println("\n--- Turno del Jugador ---");
-
-            player.setReflecting(false);
-            player.performTurn(enemy);
-
-            if (enemy.isAlive()) {
-                System.out.println("\n--- Turno de " + enemy.getName() + " ---");
-                enemy.setReflecting(false);
-                enemy.performTurn(player);
-            }
-
+            executeTurnOrder(firstTurn);
             printStatus();
         }
 
+        announceWinner();
+    }
+    private void announceFirstTurn(TurnDecider.FirstTurn firstTurn) {
+        System.out.println("\nLanzando una moneda...");
+        System.out.println(firstTurn == TurnDecider.FirstTurn.PLAYER
+            ? "¡El jugador comienza!"
+            : "¡El enemigo comienza!");
+    }
+
+    private void executeTurnOrder(TurnDecider.FirstTurn firstTurn) {
+        if (firstTurn == TurnDecider.FirstTurn.PLAYER) {
+            performPlayerTurn();
+            if (enemy.isAlive()) performEnemyTurn();
+        } else {
+            performEnemyTurn();
+            if (player.isAlive()) performPlayerTurn();
+        }
+    }
+
+    private void performPlayerTurn() {
+        System.out.println("\n--- Turno del Jugador ---");
+        player.setReflecting(false);
+        player.performTurn(enemy);
+    }
+
+    private void performEnemyTurn() {
+        System.out.println("\n--- Turno de " + enemy.getName() + " ---");
+        enemy.setReflecting(false);
+        enemy.performTurn(player);
+    }
+
+    private void announceWinner() {
         if (!enemy.isAlive()) {
             System.out.println(enemy.getName() + " ha sido derrotado.");
+            PowerUp powerUp = PowerUpGenerator.generateRandomPowerUp();
+            powerUp.apply(player);  // El jugador recibe el power-up
+        } else {
+            System.out.println(player.getName() + " ha sido derrotado.");
         }
     }
 
@@ -45,7 +76,7 @@ public class CombatManager {
 
     private void printStatus() {
         System.out.println("\n[Estado]");
-        System.out.println(player.getName() + " - HP: " + player.getHealth() + " - Estado: " + player.getState().getClass().getSimpleName());
-        System.out.println(enemy.getName() + " - HP: " + enemy.getHealth() + " - Estado: " + enemy.getState().getClass().getSimpleName());
+        System.out.println(player.getName() + " - HP: " + player.getHealth() + " - Estado: " + player.getState().getName());
+        System.out.println(enemy.getName() + " - HP: " + enemy.getHealth() + " - Estado: " + enemy.getState().getName());
     }
 }
