@@ -5,7 +5,7 @@ import java.util.Random;
 import actions.*;
 import strategies.*;
 
-public class Enemy extends Character {
+public class Enemy extends Character implements CombatStrategy {
 
 	protected CombatStrategy combatStrategy;
 	public Enemy(CombatStrategy combatStrategy) {
@@ -44,5 +44,11 @@ public class Enemy extends Character {
 
 	    action.perform(this, target);
 	}
+
+	
+	public ActionComponent decideAction(Enemy self, Character target) {
+		return this.combatStrategy.decideAction(self, target);
+	}
+	
 	
 }
