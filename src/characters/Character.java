@@ -29,6 +29,7 @@ public abstract class Character {
 	this.defense = defense;
 	this.stamina = stamina;
 	this.currentState = new CharacterHealthyState();
+	this.maxHealth = 100;
 	}
 	
 	public void takeDamage(int daño) {
