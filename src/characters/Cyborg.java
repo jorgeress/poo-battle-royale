@@ -1,11 +1,11 @@
 package characters;
 
-import strategies.PassiveCombatStrategy;
+import strategies.CombatStrategy;
 
 public class Cyborg extends Enemy{
 
-	public Cyborg() {
-		super(new PassiveCombatStrategy());
-	}
+	public Cyborg(int health, int strength, int defense, String name, int speed, CombatStrategy strategy) {
+        super(health, strength, defense, name, speed, strategy);
+    }
 
 }

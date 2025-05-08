@@ -48,7 +48,7 @@ public class CombatManager {
     }
 
     private void performPlayerTurn() {
-        System.out.println("\n--- Turno del Jugador ---");
+        System.out.println("\n--- Turno de " + player.getName() + " ---");
         player.setReflecting(false);
         player.performTurn(enemy);
     }

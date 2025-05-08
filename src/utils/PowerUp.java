@@ -5,7 +5,7 @@ import characters.Player;
 
 public class PowerUp {
     public enum StatType {
-        HEALTH(30), STRENGTH(10), DEFENSE(5), STAMINA(20);
+        HEALTH(30), STRENGTH(10), DEFENSE(5);
 
         private final int increment;
 
@@ -24,9 +24,7 @@ public class PowerUp {
                 case DEFENSE:
                     player.setDefense(player.getDefense() + increment);
                     break;
-                case STAMINA:
-                    player.setStamina(player.getStamina() + increment);
-                    break;
+               
             }
 
             System.out.println("¡Power-Up conseguido! " + this + " aumentada en " + increment + ".");

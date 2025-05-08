@@ -8,10 +8,10 @@ import strategies.*;
 public class Enemy extends Character implements CombatStrategy {
 
 	protected CombatStrategy combatStrategy;
-	public Enemy(CombatStrategy combatStrategy) {
-		super(100, 20, 10, "Enemigo",50);
-		this.combatStrategy = combatStrategy;
-	}
+	 public Enemy(int health, int strength, int defense, String name, int speed, CombatStrategy combatStrategy) {
+	        super(health, strength, defense, name, speed);
+	        this.combatStrategy = combatStrategy;
+	    }
 	
 	public CombatStrategy getCombatStrategy() {
 		return combatStrategy;
