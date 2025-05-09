@@ -5,6 +5,7 @@ import characterState.*;
 public abstract class Character {
 
 	public Integer health;
+	public Integer maxHealth;
 	public Integer strength;
 	public Integer defense;
 	public Integer stamina;
@@ -28,6 +29,7 @@ public abstract class Character {
 	this.defense = defense;
 	this.stamina = stamina;
 	this.currentState = new CharacterHealthyState();
+	this.maxHealth = 100;
 	}
 	
 	public void takeDamage(int daño) {
@@ -51,6 +53,9 @@ public abstract class Character {
 	public Integer getDefense() {
 		return defense;
 	}
+
+	public int getMaxHealth() { return maxHealth; }
+
 	public String getName() {
 		return name;
 	}

@@ -1,16 +1,25 @@
 package characters;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import actions.*;
 import strategies.*;
+import templates.EnemyBehaviorTemplate;
 
 public class Enemy extends Character implements CombatStrategy {
 
 	protected CombatStrategy combatStrategy;
+	protected EnemyBehaviorTemplate enemyBehavior;
+	protected int maxHealth;
+	protected List<String> actionHistory;
+
 	public Enemy(CombatStrategy combatStrategy) {
 		super(100, 20, 10, "Enemigo",50);
 		this.combatStrategy = combatStrategy;
+		this.maxHealth = 100;
+		this.actionHistory = new ArrayList<>();
 	}
 	
 	public CombatStrategy getCombatStrategy() {
@@ -24,7 +33,6 @@ public class Enemy extends Character implements CombatStrategy {
 		ActionComponent action = combatStrategy.decideAction(this, target);
 		
 		Random rand = new Random();
-
 
 		double paralyzeChance = rand.nextDouble();
 		double burnChance = rand.nextDouble();
@@ -49,4 +57,6 @@ public class Enemy extends Character implements CombatStrategy {
 		return this.combatStrategy.decideAction(self, target);
 	}
 
+	
+	
 }
