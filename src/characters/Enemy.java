@@ -8,7 +8,7 @@ import actions.*;
 import strategies.*;
 import templates.EnemyBehaviorTemplate;
 
-public class Enemy extends Character implements CombatStrategy{
+public class Enemy extends Character implements CombatStrategy {
 
 	protected CombatStrategy combatStrategy;
 	protected EnemyBehaviorTemplate enemyBehavior;
@@ -104,4 +104,11 @@ public class Enemy extends Character implements CombatStrategy{
 		}
 		return action;
 	}
+
+	public ActionComponent decideAction(Enemy self, Character target) {
+		return this.combatStrategy.decideAction(self, target);
+	}
+
 }
+
+
