@@ -2,6 +2,7 @@ package characterState;
 
 import characters.Character;
 public class CharacterBurningState implements CharacterState {
+	
     private Integer turns = 2;
     private Integer daño = 10;
 

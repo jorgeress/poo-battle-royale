@@ -1,54 +1,13 @@
+
 package characters;
 
-import java.util.Random;
+import strategies.CombatStrategy;
+import templates.EnemyBehaviorTemplate;
 
-import actions.*;
-import strategies.*;
+public class Enemy extends EnemyBehaviorTemplate {
 
-public class Enemy extends Character implements CombatStrategy {
+    public Enemy(int health, int strength, int defense, String name, int speed, CombatStrategy strategy) {
+        super(health, strength, defense, name, speed, strategy);
+    }
 
-	protected CombatStrategy combatStrategy;
-	 public Enemy(int health, int strength, int defense, String name, int speed, CombatStrategy combatStrategy) {
-	        super(health, strength, defense, name, speed);
-	        this.combatStrategy = combatStrategy;
-	    }
-	
-	public CombatStrategy getCombatStrategy() {
-		return combatStrategy;
-	}
-
-	public void setCombatStrategy(CombatStrategy combatStrategy) {
-		this.combatStrategy = combatStrategy;
-	}
-	public void act(Character target) {
-		ActionComponent action = combatStrategy.decideAction(this, target);
-		
-		Random rand = new Random();
-
-
-		double paralyzeChance = rand.nextDouble();
-		double burnChance = rand.nextDouble();
-
-		if (paralyzeChance <= 0.25) {
-			action = new ParalyzingAttackDecorator(action);
-		}
-		if (burnChance <= 0.25) {
-			action = new BurningAttackDecorator(action);
-		}
-    
-		
-	    if (strength > 60 && action instanceof BasicAttackComponent) {
-	        action = new PowerfulAttackDecorator(action);
-	    }
-	    System.out.println(getName() + " realiza " + action.getDescription());
-
-	    action.perform(this, target);
-	}
-
-	
-	public ActionComponent decideAction(Enemy self, Character target) {
-		return this.combatStrategy.decideAction(self, target);
-	}
-	
-	
 }

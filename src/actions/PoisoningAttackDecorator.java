@@ -1,11 +1,14 @@
 package actions;
 
-import characterState.CharacterBurningState;
+
+import characterState.CharacterPoisonedState;
 import characters.Character;
 
 public class PoisoningAttackDecorator implements ActionComponent {
 
     private final ActionComponent actionComponent;
+    private final int staminaCost = 10;
+
 
     public PoisoningAttackDecorator(ActionComponent actionComponent) {
         this.actionComponent = actionComponent;
@@ -13,11 +16,19 @@ public class PoisoningAttackDecorator implements ActionComponent {
 
     @Override
     public void perform(Character attacker, Character target) {
-        actionComponent.perform(attacker, target);
-        if (target.isAlive()) {
-            target.setState(new CharacterBurningState());
-            System.out.println(target.getName() + " está envenenado.");
+    	if (attacker.getStamina() < staminaCost) {
+            System.out.println(attacker.getName() + " no tiene suficiente stamina para ataque paralizador.");
+            actionComponent.perform(attacker, target); // fallback
+            return;
         }
+
+    	 attacker.setStamina(attacker.getStamina() - staminaCost); // Gasta stamina
+
+         actionComponent.perform(attacker, target); // Aplica el daño base
+    	if (target.isAlive()) {
+            target.setState(new CharacterPoisonedState());
+            System.out.println(target.getName() + " está envenenado.");
+    	}
     }
 
     @Override
