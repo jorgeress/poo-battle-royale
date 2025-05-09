@@ -2,7 +2,7 @@ package characterState;
 
 import characters.Character;
 public class CharacterParalyzedState implements CharacterState {
-    private int turns = 1;
+    private Integer turns = 1;
 
     @Override
     public void handle(Character self, Character target) {
@@ -13,4 +13,7 @@ public class CharacterParalyzedState implements CharacterState {
             self.setState(new CharacterHealthyState());
         }
     }
+	public String getName() {
+		return "ParalyzedState";
+	}
 }

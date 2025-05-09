@@ -11,7 +11,7 @@ public class BasicDefenseComponent implements ActionComponent {
 
     @Override
     public String getName() {
-        return "Defensa";
+        return "Defensa ";
     }
 
     @Override

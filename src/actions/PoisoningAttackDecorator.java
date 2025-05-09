@@ -3,11 +3,11 @@ package actions;
 import characterState.CharacterBurningState;
 import characters.Character;
 
-public class BurningAttackDecorator implements ActionComponent {
+public class PoisoningAttackDecorator implements ActionComponent {
 
     private final ActionComponent actionComponent;
 
-    public BurningAttackDecorator(ActionComponent actionComponent) {
+    public PoisoningAttackDecorator(ActionComponent actionComponent) {
         this.actionComponent = actionComponent;
     }
 
@@ -16,13 +16,13 @@ public class BurningAttackDecorator implements ActionComponent {
         actionComponent.perform(attacker, target);
         if (target.isAlive()) {
             target.setState(new CharacterBurningState());
-            System.out.println(target.getName() + " está ardiendo.");
+            System.out.println(target.getName() + " está envenenado.");
         }
     }
 
     @Override
     public String getName() {
-        return "incendiario";
+        return "envenenado";
     }
 
     @Override

@@ -94,6 +94,7 @@ public class Enemy extends Character implements CombatStrategy {
 		return action;
 	}
 
+develop
 	// Paso 3 - abstracto, cada subclase debe implementarlo
 	protected abstract ActionComponent applyTypeSpecificEffects(ActionComponent action);
 
@@ -109,6 +110,7 @@ public class Enemy extends Character implements CombatStrategy {
 		return this.combatStrategy.decideAction(self, target);
 	}
 
+main
 }
 
 

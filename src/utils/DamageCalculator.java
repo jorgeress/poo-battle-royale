@@ -30,7 +30,7 @@ public class DamageCalculator {
         if (defender.isReflecting() && attacker != null) {
             int reflectedDamage = damage; 
             attacker.takeDamage(reflectedDamage);
-            System.out.println(defender.getName() + " refleja " + reflectedDamage + " de daño a " + attacker.getName());
+            System.out.println(defender.getName() + " ha reflejado el daño a " + attacker.getName());
             defender.setReflecting(false); 
         }
         else {
