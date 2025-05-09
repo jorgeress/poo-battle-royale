@@ -45,10 +45,7 @@ public class Enemy extends Character implements CombatStrategy {
 	    action.perform(this, target);
 	}
 
-	
-	public ActionComponent decideAction(Enemy self, Character target) {
-		return this.combatStrategy.decideAction(self, target);
-	}
+
 	
 	
 }
