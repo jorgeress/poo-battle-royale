@@ -8,7 +8,7 @@ import actions.*;
 import strategies.*;
 import templates.EnemyBehaviorTemplate;
 
-public abstract class Enemy extends Character implements CombatStrategy{
+public class Enemy extends Character implements CombatStrategy{
 
 	protected CombatStrategy combatStrategy;
 	protected EnemyBehaviorTemplate enemyBehavior;
