@@ -7,8 +7,8 @@ import factories.*;
 
 public class WorldManager {
 
-    private int currentWorldIndex;
-    private int currentEnemyIndex;
+    private Integer currentWorldIndex;
+    private Integer currentEnemyIndex;
 
     private EnemyAbstractFactory currentFactory;
 
@@ -58,7 +58,7 @@ public class WorldManager {
                 	currentFactory = new World3AbstractFactory();
                     break;
                 default:
-                    break; // si hay más mundos, añádelos aquí
+                    break; 
             }
         }
 

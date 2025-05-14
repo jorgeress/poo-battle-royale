@@ -17,7 +17,9 @@ public class GameController {
     }
 
     public void startGame() {
-        System.out.println("¡Bienvenido al combate!");
+        System.out.println("\n\n\n¡Bienvenido al combate!");
+        System.out.println("\nSi parpadeas morirás!");
+
 
         while (player.isAlive() && worldManager.hasNextEnemy()) {
             Enemy enemy = worldManager.getNextEnemy();
@@ -33,6 +35,12 @@ public class GameController {
         }
 
         System.out.println("\n¡Has completado todos los combates!");
+        printFinalStatus();
     }
+ // Mostrar el puntaje final al terminar la partida
+    private void printFinalStatus() {
+        player.displayFinalScore();
+    }
+    
 }
 

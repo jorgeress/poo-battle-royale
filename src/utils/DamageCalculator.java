@@ -15,14 +15,16 @@ public class DamageCalculator {
         return instance;
     }
 
-    // Método clásico para obtener el daño calculado
+    // Método  para obtener el daño calculado
     public int calculate(Character attacker, Character defender) {
-        int baseDamage = attacker.getStrength();
+    	int baseDamage = attacker.getStrength();
         int defense = defender.getDefense();
-        return Math.max(0, baseDamage - defense);
+        
+        int damage = (baseDamage * 100) / (100 + defense);
+        return Math.max(1, damage);
     }
 
-    // Método nuevo que aplica el daño directamente y gestiona efectos como reflejo
+    // Método gestiona efectos como reflejo
     public void applyDamage(Character attacker, Character defender) {
         int damage = calculate(attacker, defender);
         
@@ -34,11 +36,10 @@ public class DamageCalculator {
             defender.setReflecting(false); 
         }
         else {
-        	defender.takeDamage(damage);  // Método sugerido para claridad en vez de modificar `health` directamente
-            System.out.println(defender.getName() + " recibe " + damage + " de daño.");
+        	defender.takeDamage(damage);  
 
         }
     }
 }
 
-// GITHUB
+

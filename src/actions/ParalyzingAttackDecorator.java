@@ -1,37 +1,28 @@
 package actions;
 
+
 import characterState.CharacterParalyzedState;
 import characters.Character;
 
-public class ParalyzingAttackDecorator implements ActionComponent{
-
-	private final ActionComponent actionComponent;
+public class ParalyzingAttackDecorator extends EffectAttackDecorator {
 
     public ParalyzingAttackDecorator(ActionComponent actionComponent) {
-        this.actionComponent = actionComponent;
+        super(actionComponent, 10); // 10 de stamina
     }
 
-    public void perform(Character attacker, Character target) {
-        int stamina = attacker.getStrength();
-        attacker.stamina = stamina - 10;
-
-        actionComponent.perform(attacker, target);
-
-        // Aplicar parálisis al objetivo
-        if (target.isAlive()) {
-            target.setState(new CharacterParalyzedState());
-            System.out.println(target.getName() + " ha quedado paralizado por 1 turno.");
-        }
+    protected void applyEffect(Character target) {
+        target.setState(new CharacterParalyzedState());
     }
 
-	
+    
+    protected String getEffectName() {
+        return "paralizado";
+    }
+
 	public String getName() {
-		return "paralizador";
+		return "Paralizador";
 	}
-
-
 	public String getDescription() {
 		return actionComponent.getDescription() + getName();
 	}
-
 }

@@ -7,6 +7,7 @@ public class PowerfulAttackDecorator implements ActionComponent {
 	 private final ActionComponent actionComponent;
 
 	    public PowerfulAttackDecorator(ActionComponent wrapped) {
+	    	super();
 	        this.actionComponent = wrapped;
 	    }
 

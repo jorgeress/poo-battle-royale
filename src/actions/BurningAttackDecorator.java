@@ -3,30 +3,25 @@ package actions;
 import characterState.CharacterBurningState;
 import characters.Character;
 
-public class BurningAttackDecorator implements ActionComponent {
-
-    private final ActionComponent actionComponent;
+public class BurningAttackDecorator extends EffectAttackDecorator {
 
     public BurningAttackDecorator(ActionComponent actionComponent) {
-        this.actionComponent = actionComponent;
+        super(actionComponent, 10); // 10 de stamina
     }
 
-    @Override
-    public void perform(Character attacker, Character target) {
-        actionComponent.perform(attacker, target);
-        if (target.isAlive()) {
-            target.setState(new CharacterBurningState());
-            System.out.println(target.getName() + " está ardiendo.");
-        }
+    protected void applyEffect(Character target) {
+        target.setState(new CharacterBurningState());
     }
 
-    @Override
-    public String getName() {
-        return "incendiario";
+    
+    protected String getEffectName() {
+        return "ardiendo";
     }
 
-    @Override
-    public String getDescription() {
-        return actionComponent.getDescription() + getName();
-    }
+	public String getName() {
+		return "Incendiario";
+	}
+	public String getDescription() {
+		return actionComponent.getDescription() + getName();
+	}
 }

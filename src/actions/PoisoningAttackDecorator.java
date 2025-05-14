@@ -1,32 +1,29 @@
 package actions;
 
-import characterState.CharacterBurningState;
+
+
+import characterState.CharacterPoisonedState;
 import characters.Character;
 
-public class PoisoningAttackDecorator implements ActionComponent {
-
-    private final ActionComponent actionComponent;
+public class PoisoningAttackDecorator extends EffectAttackDecorator {
 
     public PoisoningAttackDecorator(ActionComponent actionComponent) {
-        this.actionComponent = actionComponent;
+        super(actionComponent, 10); // 10 de stamina
     }
 
-    @Override
-    public void perform(Character attacker, Character target) {
-        actionComponent.perform(attacker, target);
-        if (target.isAlive()) {
-            target.setState(new CharacterBurningState());
-            System.out.println(target.getName() + " está envenenado.");
-        }
+    protected void applyEffect(Character target) {
+        target.setState(new CharacterPoisonedState());
     }
 
-    @Override
-    public String getName() {
+    
+    protected String getEffectName() {
         return "envenenado";
     }
 
-    @Override
-    public String getDescription() {
-        return actionComponent.getDescription() + getName();
-    }
+	public String getName() {
+		return "Envenenado";
+	}
+	public String getDescription() {
+		return actionComponent.getDescription() + getName();
+	}
 }

@@ -1,62 +1,61 @@
 package templates;
 
+
 import characters.Character;
 import characters.Enemy;
-import characterState.CharacterState;
+import characters.Player;
+import actions.*;
+import strategies.*;
+import java.util.Random;
 
-public abstract class EnemyBehaviorTemplate {
 
-    // Método template que define la secuencia de pasos
-    public final String execute(Enemy enemy, Character player) {
-        // Paso 1: Analizar la situación de combate
-        analyzeCombatSituation(enemy, player);
+public abstract class EnemyBehaviorTemplate extends Character {
 
-        // Paso 2: Elegir una estrategia basada en el análisis
-        String strategy = chooseStrategy(enemy, player);
+	protected CombatStrategy combatStrategy;
+	 public EnemyBehaviorTemplate(int health, int strength, int defense, String name, int speed, CombatStrategy combatStrategy) {
+	        super(health, strength, defense, name, speed);
+	        this.combatStrategy = combatStrategy;
+	    }
+	
+	public CombatStrategy getCombatStrategy() {
+		return combatStrategy;
+	}
 
-        // Paso 3: Determinar la acción específica basada en la estrategia
-        String action = determineSpecificAction(enemy, player, strategy);
+	public void setCombatStrategy(CombatStrategy combatStrategy) {
+		this.combatStrategy = combatStrategy;
+	}
+	public void act(Character target) { // metodo template para el resto de enemigos
+		ActionComponent action = combatStrategy.decideAction(this, target);
+		
+		Random rand = new Random();
 
-        // Paso 4: Aplicar modificadores de estado a la acción
-        String modifiedAction = applyStateModifiers(enemy, action);
+	    if (rand.nextDouble() <= 0.25 && getStamina() >= 10) {
+	        action = new ParalyzingAttackDecorator(action);
+	    }
+	    if (rand.nextDouble() <= 0.25 && getStamina() >= 10) {
+	        action = new PoisoningAttackDecorator(action);
+	    }
+	    if (rand.nextDouble() <= 0.25 && getStamina() >= 10) {
+	        action = new BurningAttackDecorator(action);
+	    }
 
-        // Paso 5: Registrar la acción para análisis futuros
-        recordAction(enemy, modifiedAction);
+	    if (strength > 60 && action instanceof BasicAttackComponent && getStamina() >= 15) {
+	        action = new PowerfulAttackDecorator(action);
+	    }
 
-        // Devolver la acción resultante
-        return modifiedAction;
-    }
+   
+	    System.out.println(getName() + " realiza " + action.getDescription());
 
-    // Los siguientes métodos definen los pasos del algoritmo
-    // y pueden ser sobreescritos por las subclases
+	    action.perform(this, target);
+	}
 
-    //Verifica si el enemigo puede realizar uan accion
-    protected boolean canPerformAction(Enemy enemy) {
-        // Implementación por defecto - verifica salud básica
-        return enemy.getHealth() > 0;
-    }
-
-    // Análisis de la situación
-    protected abstract void analyzeCombatSituation(Enemy enemy, Character player);
-
-    // Selección de estrategia
-    protected abstract String chooseStrategy(Enemy enemy, Character player);
-
-    // Determinación de acción específica
-    protected abstract String determineSpecificAction(Enemy enemy, Character player, String strategy);
-
-    // Aplicación de modificadores de estado
-    protected String applyStateModifiers(Enemy enemy, String action) {
-        // Implementación por defecto - puede ser extendida
-        if (enemy.getHealth() < enemy.getMaxHealth() * 0.2) {
-            action = "Desesperado: " + action;
-        }
-        return action;
-    }
-
-    // Registro de acciones
-    protected void recordAction(Enemy enemy, String action) {
-        // Implementación por defecto - puede ser extendida
-        enemy.addToActionHistory(action);
-    }
+	
+	public ActionComponent decideAction(Enemy self, Character target) {
+		return this.combatStrategy.decideAction(self, target);
+	}
+	
+	public void rewardPlayer(Player player) {
+       // Otorga puntos al jugador al derrotar al enemigo
+       player.addPoints(100);  // Ejemplo: da 100 puntos por derrotar al enemigo
+   }
 }

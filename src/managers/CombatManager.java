@@ -38,7 +38,7 @@ public class CombatManager {
     }
 
     private void executeTurnOrder(TurnDecider.FirstTurn firstTurn) {
-        if (firstTurn == TurnDecider.FirstTurn.PLAYER) {
+        if (firstTurn.equals(TurnDecider.FirstTurn.PLAYER)) {
             performPlayerTurn();
             if (enemy.isAlive()) performEnemyTurn();
         } else {
@@ -48,7 +48,7 @@ public class CombatManager {
     }
 
     private void performPlayerTurn() {
-        System.out.println("\n--- Turno del Jugador ---");
+        System.out.println("\n--- Turno de " + player.getName() + " ---");
         player.setReflecting(false);
         player.performTurn(enemy);
     }
@@ -64,11 +64,21 @@ public class CombatManager {
             System.out.println(enemy.getName() + " ha sido derrotado.");
             PowerUp powerUp = PowerUpGenerator.generateRandomPowerUp();
             powerUp.apply(player);  // El jugador recibe el power-up
+            enemy.rewardPlayer(player);
+            player.recoverPostBattle();
+
         } else {
             System.out.println(player.getName() + " ha sido derrotado.");
+            printFinalStatus();
+            
         }
     }
 
+ // Mostrar el puntaje final al terminar la partida
+    private void printFinalStatus() {
+        System.out.println("\n--- Fin del Combate ---");
+        player.displayFinalScore();
+    }
     private void updateStates() {
         player.updateStates();
         enemy.updateStates();
@@ -79,4 +89,5 @@ public class CombatManager {
         System.out.println(player.getName() + " - HP: " + player.getHealth() + " - Estado: " + player.getState().getName());
         System.out.println(enemy.getName() + " - HP: " + enemy.getHealth() + " - Estado: " + enemy.getState().getName());
     }
+    
 }
