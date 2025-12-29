@@ -1,4 +1,4 @@
-# Battle Royale de Personajes
+# COMBATE POR TURNOS
 
 Este es un proyecto desarrollado en **Java**. Contiene las funcionalidades y lógica detalladas en la documentación oficial adjunta.
 
