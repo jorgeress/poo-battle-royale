@@ -17,15 +17,9 @@ Para obtener información detallada sobre el análisis, diseño, manual de usuar
 
 ## Instalación y Ejecución
 
-1.  Clonar el repositorio:
-    ```bash
-    git clone [https://github.com/tu-usuario/nombre-del-repo.git](https://github.com/tu-usuario/nombre-del-repo.git)
-    ```
-2.  Compilar el proyecto:
-    ```bash
-    javac Main.java
-    ```
-3.  Ejecutar la aplicación:
-    ```bash
-    java Main
-    ```
+1.  Clonar el repositorio
+    
+2.  Compilar el proyecto
+   
+3.  Ejecutar la aplicación
+    
