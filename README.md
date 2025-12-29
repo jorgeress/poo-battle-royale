@@ -9,7 +9,7 @@ El proyecto ha sido diseñado para cumplir con los requisitos establecidos en la
 ## Documentación Completa
 
 Para obtener información detallada sobre el análisis, diseño, manual de usuario y conclusiones, por favor consulte el archivo:
-`Memoria Proyecto Jorge García Martínez.pdf`
+`MEMORIA DEL PROYECTOJUEGO DE COMBATE POR TURNOS.pdf`
 
 ## Requisitos
 
